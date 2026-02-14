@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MTH101 CBT Mock Exam - Practice Platform</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Login Page -->
+    <div id="loginPage" class="page active">
+        <div class="login-container">
+            <div class="login-header">
+                <i class="fas fa-graduation-cap"></i>
+                <h1>MTH101 CBT Mock Exam</h1>
+                <p>Practice Platform for General Mathematics I</p>
+            </div>
+            
+            <div class="login-form">
+                <h2>Student Login</h2>
+                <div class="form-group">
+                    <label for="studentName">
+                        <i class="fas fa-user"></i> Full Name
+                    </label>
+                    <input 
+                        type="text" 
+                        id="studentName" 
+                        placeholder="e.g., Odamah Jonathan"
+                        required
+                    >
+                </div>
+                
+                <div class="form-group">
+                    <label for="studentDept">
+                        <i class="fas fa-building"></i> Department
+                    </label>
+                    <input 
+                        type="text" 
+                        id="studentDept" 
+                        placeholder="e.g., Medicine and Surgery"
+                        required
+                    >
+                </div>
+                
+                <button onclick="login()" class="btn btn-primary">
+                    Start Practice <i class="fas fa-arrow-right"></i>
+                </button>
+                
+                <div class="login-info">
+                    <p><i class="fas fa-info-circle"></i> Your progress will be saved automatically</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Stage Selection Page -->
+    <div id="stagePage" class="page">
+        <div class="stage-container">
+            <div class="welcome-header">
+                <h1>Welcome, <span id="welcomeName"></span>!</h1>
+                <p><i class="fas fa-building"></i> <span id="welcomeDept"></span></p>
+                <button onclick="logout()" class="btn-logout">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </button>
+            </div>
+
+            <div class="stages-grid">
+                <!-- Stage 1 -->
+                <div class="stage-card" id="stage1Card">
+                    <div class="stage-icon stage1-icon">
+                        <i class="fas fa-seedling"></i>
+                    </div>
+                    <h2>Stage 1: Foundation</h2>
+                    <div class="stage-details">
+                        <p><i class="fas fa-question-circle"></i> 70 Easy Questions</p>
+                        <p><i class="fas fa-clock"></i> 40 Minutes</p>
+                        <p><i class="fas fa-trophy"></i> Pass: 35/70 (50%)</p>
+                    </div>
+                    <div class="stage-status" id="stage1Status">
+                        <span class="badge badge-locked">Start Here</span>
+                    </div>
+                    <button onclick="startStage(1)" class="btn btn-stage" id="stage1Btn">
+                        Begin Stage 1
+                    </button>
+                    <div class="stage-score" id="stage1Score"></div>
+                </div>
+
+                <!-- Stage 2 -->
+                <div class="stage-card locked" id="stage2Card">
+                    <div class="stage-icon stage2-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h2>Stage 2: Intermediate</h2>
+                    <div class="stage-details">
+                        <p><i class="fas fa-question-circle"></i> 70 Medium Questions</p>
+                        <p><i class="fas fa-clock"></i> 30 Minutes</p>
+                        <p><i class="fas fa-trophy"></i> Pass: 32/70 (45%)</p>
+                    </div>
+                    <div class="stage-status" id="stage2Status">
+                        <span class="badge badge-locked"><i class="fas fa-lock"></i> Locked</span>
+                    </div>
+                    <button onclick="startStage(2)" class="btn btn-stage" id="stage2Btn" disabled>
+                        Begin Stage 2
+                    </button>
+                    <div class="stage-score" id="stage2Score"></div>
+                </div>
+
+                <!-- Stage 3 -->
+                <div class="stage-card locked" id="stage3Card">
+                    <div class="stage-icon stage3-icon">
+                        <i class="fas fa-crown"></i>
+                    </div>
+                    <h2>Stage 3: Advanced</h2>
+                    <div class="stage-details">
+                        <p><i class="fas fa-question-circle"></i> 70 Hard Questions</p>
+                        <p><i class="fas fa-clock"></i> 30 Minutes</p>
+                        <p><i class="fas fa-trophy"></i> Pass: 28/70 (40%)</p>
+                    </div>
+                    <div class="stage-status" id="stage3Status">
+                        <span class="badge badge-locked"><i class="fas fa-lock"></i> Locked</span>
+                    </div>
+                    <button onclick="startStage(3)" class="btn btn-stage" id="stage3Btn" disabled>
+                        Begin Stage 3
+                    </button>
+                    <div class="stage-score" id="stage3Score"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Exam Page -->
+    <div id="examPage" class="page">
+        <div class="exam-header">
+            <div class="exam-info">
+                <h2 id="examStageTitle">Stage 1: Foundation Level</h2>
+                <p id="examProgress">Question 1 of 70</p>
+            </div>
+            <div class="exam-timer" id="timer">
+                <i class="fas fa-clock"></i>
+                <span id="timerDisplay">40:00</span>
+            </div>
+        </div>
+
+        <div class="exam-container">
+            <div class="question-card">
+                <div class="question-header">
+                    <span class="question-number" id="questionNumber">Question 1</span>
+                    <span class="question-topic" id="questionTopic">Set Theory</span>
+                </div>
+                
+                <div class="question-text" id="questionText">
+                    Loading question...
+                </div>
+
+                <div class="options" id="optionsContainer">
+                    <!-- Options will be dynamically inserted -->
+                </div>
+            </div>
+
+            <div class="exam-navigation">
+                <button onclick="previousQuestion()" class="btn btn-secondary" id="prevBtn">
+                    <i class="fas fa-arrow-left"></i> Previous
+                </button>
+                
+                <button onclick="flagQuestion()" class="btn btn-outline" id="flagBtn">
+                    <i class="far fa-flag"></i> Flag for Review
+                </button>
+                
+                <button onclick="nextQuestion()" class="btn btn-primary" id="nextBtn">
+                    Next <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+
+            <div class="question-grid">
+                <h3>Question Navigator</h3>
+                <div id="questionGrid" class="grid-container">
+                    <!-- Question grid will be dynamically inserted -->
+                </div>
+                <div class="grid-legend">
+                    <span><span class="legend-box answered"></span> Answered</span>
+                    <span><span class="legend-box flagged"></span> Flagged</span>
+                    <span><span class="legend-box unanswered"></span> Unanswered</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="exam-footer">
+            <button onclick="submitExam()" class="btn btn-submit">
+                <i class="fas fa-check"></i> Submit Exam
+            </button>
+        </div>
+    </div>
+
+    <!-- Results Page -->
+    <div id="resultsPage" class="page">
+        <div class="results-container">
+            <div class="results-header">
+                <h1>Exam Results</h1>
+                <p id="resultStudentInfo"></p>
+            </div>
+
+            <div class="score-display">
+                <div class="score-circle" id="scoreCircle">
+                    <div class="score-inner">
+                        <span class="score-percentage" id="scorePercentage">0%</span>
+                        <span class="score-label">Your Score</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="results-breakdown">
+                <div class="stat-card">
+                    <i class="fas fa-check-circle"></i>
+                    <h3 id="correctCount">0</h3>
+                    <p>Correct</p>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-times-circle"></i>
+                    <h3 id="wrongCount">0</h3>
+                    <p>Wrong</p>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-circle"></i>
+                    <h3>70</h3>
+                    <p>Total</p>
+                </div>
+            </div>
+
+            <div class="verdict" id="verdict">
+                <!-- Pass/Fail message will be inserted here -->
+            </div>
+
+            <div class="topic-performance" id="topicPerformance">
+                <h3>Performance by Topic</h3>
+                <div id="topicBreakdown"></div>
+            </div>
+
+            <div class="results-actions">
+                <button onclick="reviewAnswers()" class="btn btn-primary">
+                    <i class="fas fa-search"></i> Review Answers with AI Explanations
+                </button>
+                <button onclick="backToStages()" class="btn btn-secondary">
+                    <i class="fas fa-home"></i> Back to Stages
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Review Page -->
+    <div id="reviewPage" class="page">
+        <div class="review-container">
+            <div class="review-header">
+                <h1>Answer Review with AI Explanations</h1>
+                <button onclick="backToResults()" class="btn btn-secondary">
+                    <i class="fas fa-arrow-left"></i> Back to Results
+                </button>
+            </div>
+
+            <div id="reviewContent">
+                <!-- Review content will be dynamically inserted -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Victory Modal (for completing all 3 stages) -->
+    <div id="victoryModal" class="modal">
+        <div class="modal-content victory-content">
+            <div class="confetti"></div>
+            <div class="victory-animation">
+                <i class="fas fa-trophy"></i>
+            </div>
+            <h1>🎉 CONGRATULATIONS! 🎉</h1>
+            <h2 id="victoryName"></h2>
+            <p class="victory-message">
+                You have successfully completed ALL THREE STAGES of the MTH101 Mock Exam!
+            </p>
+            <div class="victory-stats">
+                <div class="victory-stat">
+                    <i class="fas fa-star"></i>
+                    <p>Stage 1: <span id="victoryStage1"></span>%</p>
+                </div>
+                <div class="victory-stat">
+                    <i class="fas fa-star"></i>
+                    <p>Stage 2: <span id="victoryStage2"></span>%</p>
+                </div>
+                <div class="victory-stat">
+                    <i class="fas fa-star"></i>
+                    <p>Stage 3: <span id="victoryStage3"></span>%</p>
+                </div>
+            </div>
+            <p class="victory-final">You are now ready for the real CBT exam!</p>
+            <button onclick="closeVictory()" class="btn btn-primary btn-large">
+                <i class="fas fa-check"></i> Continue
+            </button>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

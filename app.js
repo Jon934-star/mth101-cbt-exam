@@ -20,24 +20,24 @@ const STAGE_CONFIG = {
         difficulty: 'easy',
         questions: 70,
         time: 40 * 60, // 40 minutes in seconds
-        passPercentage: 50,
-        passMarks: 35,
+        passPercentage: 71.42,
+        passMarks: 50,
         title: 'Stage 1: Foundation Level'
     },
     2: {
         difficulty: 'medium',
         questions: 70,
         time: 30 * 60, // 30 minutes in seconds
-        passPercentage: 45,
-        passMarks: 32,
+        passPercentage: 64.29,
+        passMarks: 45,
         title: 'Stage 2: Intermediate Level'
     },
     3: {
         difficulty: 'hard',
         questions: 70,
         time: 30 * 60, // 30 minutes in seconds
-        passPercentage: 40,
-        passMarks: 28,
+        passPercentage: 57.14,
+        passMarks: 40,
         title: 'Stage 3: Advanced Level'
     }
 };
